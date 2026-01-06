@@ -14,8 +14,11 @@ export default function Home() {
         transition={{ duration: 0.8 }}
         className="text-3xl md:text-5xl font-bold text-rose-600 mb-8"
       >
-        Welcome, My Love 💕
-        This Corner of the Internet Is All Yours 
+        <motion.p>
+          Welcome, My Love 💕 <br />
+          This Corner of the Internet Is All Yours
+        </motion.p>
+ 
       </motion.p>
 
       {/* Get Started Button */}
@@ -36,6 +39,7 @@ export default function Home() {
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.3 }}
+        
       />
     </div>
   );

@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import EmojiRain from "../components/EmojiRain";
+
 
 export default function Dashboard() {
   const cards = [
@@ -24,26 +26,21 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-[#f48fb1] via-[#f06292] to-[#ad1457] px-4 py-12">  
-      <h1
-  className="
-    text-[30px] sm:text-3xl md:text-4xl
-    font-bold text-center
-    bg-gradient-to-r from-white via-rose-100 to-white
-    bg-clip-text text-transparent
-    drop-shadow-[0_4px_10px_rgba(0,0,0,0.6)]
-    mb-10
-  "
->
-  What would you like to do?
-  <span className="ml-2 notranslate text-rose-50 bg-none text-clip">
-    🤔🫣
-  </span>
-</h1>
+   <div className="relative min-h-screen flex flex-col items-center justify-center bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-[#f48fb1] via-[#f06292] to-[#ad1457] px-4 py-12 overflow-hidden">
 
+  {/* Emoji background */}
+  <EmojiRain count={15} />
+
+  {/* Content */}
+  <div className="relative z-10 w-full flex flex-col items-center">
+    {/* your existing h1 + cards */}
+      <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center text-rose-250 mb-10">
+        What would you like to do?
+
+      </h1>
 
       <motion.div
-        className="w-[75%] grid w-full max-w-6xl gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 px-4 z-1"
+        className="w-[75%] grid max-w-6xl gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 px-4 z-1"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
@@ -63,6 +60,7 @@ export default function Dashboard() {
           </Link>
         ))}
       </motion.div>
+    </div>
     </div>
   );
 }

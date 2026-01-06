@@ -38,7 +38,7 @@ return (
   <div className="relative min-h-screen w-full flex flex-col items-center justify-center overflow-hidden px-4 py-10 bg-gradient-to-tr from-[#be185d] via-[#f472b6] to-[#fbcfe8]">
     
     {/* Background Particles */}
-    <div className="absolute inset-0 z-1 pointer-events-none">
+    <div className="absolute inset-0 z-0 pointer-events-none">
     <Particles
     className="w-full h-full"
     particleColors={['#ff0059']}

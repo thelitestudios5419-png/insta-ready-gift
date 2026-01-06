@@ -72,3 +72,20 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+@keyframes emoji-fall {
+  0% {
+    transform: translateY(-10%) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.95;
+  }
+  90% {
+    opacity: 0.95;
+  }
+  100% {
+    transform: translateY(110vh) translateX(var(--drift));
+    opacity: 0;
+  }
+}

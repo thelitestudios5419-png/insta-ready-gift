@@ -1,4 +1,4 @@
-// index.js
+// server/index.js
 import express from "express";
 import nodemailer from "nodemailer";
 import dotenv from "dotenv";
@@ -10,50 +10,101 @@ dotenv.config();
 const app = express();
 const PORT = 5000;
 
-const prompt = `
-You are an AI companion whose job is to send a sweet “virtual hug” message whenever the user clicks the “Send Hug” button. Generate a single, heartfelt paragraph (7–8 lines) that feels personal, warm, and playful—just like a real hug wrapped in words. Include at least one heart or kiss emoji, mention the phrase “sending all my love,” and keep the tone romantic and uplifting (as if speaking directly to your girlfriend).
-
-When addressing her, use exactly one of these pet names, always prefaced by “my”:
-- my baby
-- my shona
-- my pedha
-- my pookie
-- my Gauri
-- my bachha
-- my bachhu
-
-Begin with something like “Heyy my baby,” “Hii my shona,”, "heyy my sweet pedha", “Heyy my pookie,” “Hii my Gauri,” “Hello my bachha,” or “Heyy my bachhu,” then continue with a heartfelt message in a single paragraph spanning at least 7–8 lines. Make sure to include “sending all my love” somewhere in the middle or end. Do not output multiple options—only one complete paragraph per invocation.  
-
-don't generate same kind of message every time try different message every time
-`;
-
-app.use(cors());
+/* ────────────────────────
+   Middleware
+──────────────────────── */
+app.use(cors({
+  origin: "http://localhost:5173", // frontend only
+}));
 app.use(express.json());
 
+/* ────────────────────────
+   Gemini AI Setup
+──────────────────────── */
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
+/* ────────────────────────
+   Email Transporter (REUSED)
+──────────────────────── */
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS, // Gmail App Password
+  },
+});
+
+/* ────────────────────────
+   Rate Limiting (simple)
+──────────────────────── */
+let lastSent = 0;
+const RATE_LIMIT_MS = 15000;
+
+/* ────────────────────────
+   AI Prompt
+──────────────────────── */
+const prompt = `
+You are an AI companion whose job is to send a sweet “virtual hug” message whenever the user clicks the “Send Hug” button.
+Generate a single heartfelt paragraph (7–8 lines) that feels personal, warm, romantic, and playful—just like a real hug wrapped in words.
+Use cute emojis throughout the message 💕🫂😘🥹✨ and mention the phrase “sending all my love”.
+
+Begin with exactly ONE of the following (chosen randomly):
+“Heyy my baby😘😍,”
+“Hii my shona 🥰🥰,”
+“Heyy my sweet pedha 🫠💕,”
+“Heyy my pookie 🥹,”
+“Hii my Gauri 💕,”
+“Hello my bachha 😘,”
+“Heyy my bachhu 🫠,”
+“Hello my sweet little kuchupuchu 😘,”
+
+Continue naturally in ONE paragraph only.
+Do NOT generate multiple options.
+Make every message feel different from previous ones.
+`;
+
+/* ────────────────────────
+   Routes
+──────────────────────── */
 app.post("/send-hug", async (req, res) => {
-  const { toEmail } = req.body;
-
   try {
-    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+    /* Rate limit */
+    const now = Date.now();
+    if (now - lastSent < RATE_LIMIT_MS) {
+      return res.status(429).json({
+        success: false,
+        error: "Please wait before sending another hug 💗",
+      });
+    }
+    lastSent = now;
 
-    const result = await model.generateContent(prompt);
-    const response = await result.response;
-    const aiMessage = response.text();
+    /* Validate email */
+    const { toEmail } = req.body;
+    if (!toEmail || !toEmail.includes("@")) {
+      return res.status(400).json({
+        success: false,
+        error: "Invalid email address",
+      });
+    }
 
-    console.log("AI Message generated:", aiMessage);
+    /* Generate AI message */
+    let aiMessage;
+    try {
+      const model = genAI.getGenerativeModel({
+        model: "gemini-2.5-flash",
+      });
 
-    
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
-      },
-    });
+      const result = await model.generateContent(prompt);
+      aiMessage = result.response.text().trim();
+    } catch (aiError) {
+      console.error("Gemini AI failed:", aiError);
+      aiMessage =
+        "Heyy my baby 😘🫂 I’m sending all my love wrapped in the warmest hug right now 💕✨ Just close your eyes and feel me holding you tight 💗";
+    }
 
-    // Send the email
+    console.log("AI Hug Message:\n", aiMessage);
+
+    /* Send Email */
     await transporter.sendMail({
       from: `Virtual Hug 🤗💖 <${process.env.EMAIL_USER}>`,
       to: toEmail,
@@ -61,20 +112,28 @@ app.post("/send-hug", async (req, res) => {
       text: aiMessage,
     });
 
-    res.json({ success: true, message: aiMessage });
+    res.json({
+      success: true,
+      message: aiMessage,
+    });
+
   } catch (error) {
     console.error("Error sending hug:", error);
     res.status(500).json({
       success: false,
-      error: error.message || "Failed to send hug",
+      error: "Failed to send hug 💔",
     });
   }
 });
 
+/* Health Check */
 app.get("/", (req, res) => {
-  res.send("Backend is working!");
+  res.send("Backend is working ❤️");
 });
 
+/* ────────────────────────
+   Server Start
+──────────────────────── */
 app.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}`);
+  console.log(`🚀 Server running at http://localhost:${PORT}`);
 });

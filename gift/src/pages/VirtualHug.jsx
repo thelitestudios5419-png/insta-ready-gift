@@ -5,8 +5,10 @@ export default function SendHug() {
   const [status, setStatus] = useState("")
   const [overlayOpen, setOverlayOpen] = useState(false)
   const [responseMessage, setResponseMessage] = useState("")
+  const [loading, setLoading] = useState(false);
 
   const handleSend = async () => {
+    setLoading(true);
     try {
       const response = await fetch("http://localhost:5000/send-hug", {
         method: "POST",
@@ -30,7 +32,8 @@ export default function SendHug() {
       setStatus("Oops! The server’s asleep—can’t send your hug right now 💔 Please try again soon.")
       setResponseMessage("Oops! The server’s asleep—can’t send your hug right now 💔 Please try again soon.")
     } finally {
-      setOverlayOpen(true)
+      setLoading(false);
+      setOverlayOpen(true);
     }
   }
 
@@ -57,7 +60,7 @@ export default function SendHug() {
       <button
         onClick={handleSend}
         className="bg-deep-rose text-white px-6 py-2 rounded-full shadow-lg hover:bg-pink-600 transition duration-300"
-        disabled={overlayOpen}
+        disabled={loading}
       >
         Send Hug 💌
       </button>
