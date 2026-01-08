@@ -7,10 +7,20 @@ export default {
   theme: {
     extend: {
       colors: {
-        "soft-pink": "#FADADD",
-        "deep-rose": "#FF6B6B",
-      }
-    }
+        "soft-pink": {
+          100: "#FFECEE",
+          200: "#FADADD",
+          300: "#F5BFC4",
+          400: "#F1A4AC",
+        },
+        "deep-rose": {
+          300: "#FF9A9A",
+          400: "#FF6B6B",
+          500: "#F43F5E",
+          600: "#E11D48",
+        },
+      },
+    },
   },
   plugins: [],
-}
+};

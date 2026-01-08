@@ -67,28 +67,29 @@ export default function TimeTogether() {
   const hideGradient = { height: 0 };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-soft-pink to-deep-rose px-4 py-12">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-soft-pink-200 via-pink-300 to-deep-rose-500 px-4 py-12">
       {/* Heading with subtle heartbeat animation */}
       <motion.h1
-       className="text-4xl md:text-5xl font-extrabold text-white mb-8 text-center"
-        initial={{ scale: 1 }}
-        transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-      >
-        Time We’ve Been Together
-        <motion.span
-          className="text-rose-200"
-          animate={{ y: [0, -5, 0], opacity: [1, 0.7, 1] }}
+          className="text-3xl md:text-4xl font-extrabold text-rose-500 mb-8 text-center drop-shadow-xl"
+          initial={{ scale: 1 }}
           transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
         >
-          ❤️
-        </motion.span>
-      </motion.h1>
+          Since Our Hearts Met
+          <motion.span
+            className="text-deep-rose-300 drop-shadow-md"
+            animate={{ y: [0, -5, 0], opacity: [1, 0.7, 1] }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+          >
+            ❤️
+          </motion.span>
+        </motion.h1>
+
 
       <motion.div
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-4xl"
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-[88%] max-w-4xl"
       >
         {/* Years / Months / Days together */}
         <motion.div
@@ -113,7 +114,7 @@ export default function TimeTogether() {
                 topGradientStyle={hideGradient}
                 bottomGradientStyle={hideGradient}
               />
-              <span className="text-deep-rose font-semibold">yr,</span>
+              <span className="text-deep-rose-600 font-semibold">yr,</span>
             </div>
             {/* Months */}
             <div className="flex items-center space-x-1">
@@ -129,7 +130,7 @@ export default function TimeTogether() {
                 topGradientStyle={hideGradient}
                 bottomGradientStyle={hideGradient}
               />
-              <span className="text-deep-rose font-semibold">mo,</span>
+              <span className="text-deep-rose-600 font-semibold">mo,</span>
             </div>
             {/* Days */}
             <div className="flex items-center space-x-1">
@@ -145,7 +146,7 @@ export default function TimeTogether() {
                 topGradientStyle={hideGradient}
                 bottomGradientStyle={hideGradient}
               />
-              <span className="text-deep-rose font-semibold">d</span>
+              <span className="text-deep-rose-600 font-semibold">d</span>
             </div>
           </div>
         </motion.div>
