@@ -13,9 +13,8 @@ const PORT = 5000;
 /* ────────────────────────
    Middleware
 ──────────────────────── */
-app.use(cors({
-  origin: "http://localhost:5173", // frontend only
-}));
+app.use(cors());
+
 app.use(express.json());
 
 /* ────────────────────────
@@ -142,10 +141,11 @@ app.post("/send-hug", async (req, res) => {
       text: aiMessage,
     });
 
-    res.json({
+    res.status(200).json({
       success: true,
       message: aiMessage,
     });
+
 
   } catch (error) {
     console.error("Error sending hug:", error);

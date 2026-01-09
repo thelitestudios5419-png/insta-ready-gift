@@ -12,6 +12,11 @@ import VirtualHug from "./pages/VirtualHug";
 function AnimatedRoutes() {
   const location = useLocation();
 
+useEffect(() => {
+  fetch("https://https://anniversarygift.onrender.com/")
+    .catch(() => {});
+}, []);
+
   return (
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
