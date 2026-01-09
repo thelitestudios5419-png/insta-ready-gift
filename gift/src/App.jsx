@@ -1,5 +1,7 @@
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
+import { useEffect } from "react";
+
 
 import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
@@ -13,7 +15,7 @@ function AnimatedRoutes() {
   const location = useLocation();
 
 useEffect(() => {
-  fetch("https://https://anniversarygift.onrender.com/")
+  fetch("https://anniversarygift.onrender.com/")
     .catch(() => {});
 }, []);
 
