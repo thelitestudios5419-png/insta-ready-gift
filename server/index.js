@@ -22,16 +22,16 @@ app.use(express.json());
 ──────────────────────── */
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
-// /* ────────────────────────
-//    Email Transporter (REUSED)
-// ──────────────────────── */
-// const transporter = nodemailer.createTransport({
-//   service: "gmail",
-//   auth: {
-//     user: process.env.EMAIL_USER,
-//     pass: process.env.EMAIL_PASS, // Gmail App Password
-//   },
-// });
+/* ────────────────────────
+   Email Transporter (REUSED)
+──────────────────────── */
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS, // Gmail App Password
+  },
+});
 
 /* ────────────────────────
    Rate Limiting (simple)
