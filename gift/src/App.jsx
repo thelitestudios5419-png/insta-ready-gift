@@ -2,7 +2,6 @@ import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import { useEffect } from "react";
 
-
 import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
 import OpenWhen from "./pages/OpenWhen";
@@ -13,11 +12,6 @@ import VirtualHug from "./pages/VirtualHug";
 /* 👇 This component is INSIDE BrowserRouter */
 function AnimatedRoutes() {
   const location = useLocation();
-
-useEffect(() => {
-  fetch("https://anniversarygift.onrender.com/")
-    .catch(() => {});
-}, []);
 
   return (
     <AnimatePresence mode="wait">

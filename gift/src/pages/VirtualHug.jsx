@@ -13,7 +13,7 @@ export default function SendHug() {
     setOverlayOpen(true);
     setResponseMessage("Sending a warm hug… 🫂💗");
     try {
-      const response = await fetch("https://anniversarygift.onrender.com/send-hug", {
+      const response = await fetch("/api/send-hug", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
