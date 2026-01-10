@@ -7,45 +7,37 @@ export default function SendHug() {
   const [responseMessage, setResponseMessage] = useState("")
   const [loading, setLoading] = useState(false);
 
-  
+
   const handleSend = async () => {
-    setLoading(true);      // 👈 ADD THIS
+    setLoading(true);
     setOverlayOpen(true);
     setResponseMessage("Sending a warm hug… 🫂💗");
-  try {
-    const response = await fetch(
-      "https://anniversarygift.onrender.com/send-hug",
-      {
+    try {
+      const response = await fetch("https://anniversarygift.onrender.com/send-hug", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          toEmail: "theprathamesh07@gmail.com",
+          toEmail: "fufghib@gmail.com",
         }),
+      })
+
+      const data = await response.json()
+      if (data.success) {
+        setStatus("Hug sent successfully, with love! 🫂💗")
+        setResponseMessage("Hug sent successfully, with love! 🫂💗")
+      } else {
+        setStatus("Aww, the hug got lost on the way 😢 Wrap it up tighter and hit send again!")
+        setResponseMessage("Aww, the hug got lost on the way 😢 Wrap it up tighter and hit send again!")
       }
-    );
-
-    // 🚨 Check HTTP status first
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
+    } catch (error) {
+      console.error(error)
+      setStatus("Oops! The server’s asleep—can’t send your hug right now 💔 Please try again soon.")
+      setResponseMessage("Oops! The server’s asleep—can’t send your hug right now 💔 Please try again soon.")
+    } finally {
+      setLoading(false);
+      setOverlayOpen(true);
     }
-
-    const data = await response.json();
-
-    if (data.success) {
-      setResponseMessage(data.message || "Hug sent successfully 🫂💗");
-    } else {
-      setResponseMessage(data.message || "Hug failed 😢");
-    }
-  } catch (error) {
-    console.error("Frontend fetch error:", error);
-    setResponseMessage(
-      "Server is waking up 💗 Please try again in a few seconds."
-    );
-  } finally {
-    setOverlayOpen(true);
   }
-};
-
 
   const closeOverlay = () => {
     setOverlayOpen(false)

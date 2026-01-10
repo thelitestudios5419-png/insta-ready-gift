@@ -20,6 +20,7 @@ app.use(express.json());
 /* ────────────────────────
    Gemini AI Setup
 ──────────────────────── */
+console.log("🔍 GEMINI_API_KEY exists:", !!process.env.GEMINI_API_KEY);
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 /* ────────────────────────
