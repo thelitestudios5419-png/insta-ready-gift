@@ -41,10 +41,15 @@ export default function TimeTogether() {
   }, []);
 
   // Full duration object (for years/months/days breakdown)
-  const totalDuration = dayjs.duration(now.diff(startDate));
-  const years = totalDuration.years();
-  const months = totalDuration.months();
-  const days = totalDuration.days();
+  let temp = startDate;
+
+  const years = now.diff(temp, "year");
+  temp = temp.add(years, "year");
+
+  const months = now.diff(temp, "month");
+  temp = temp.add(months, "month");
+
+  const days = now.diff(temp, "day");
 
   // Total days together (integer)
   const totalDays = now.diff(startDate, "day");
