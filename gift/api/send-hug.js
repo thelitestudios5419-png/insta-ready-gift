@@ -1,6 +1,7 @@
 import nodemailer from "nodemailer";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
+
 export default async function handler(req, res) {
   // Allow only POST
   if (req.method !== "POST") {

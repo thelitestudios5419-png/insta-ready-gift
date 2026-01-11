@@ -1,7 +1,12 @@
 import { useState } from "react"
 import WarpOverlay from "../components/WarpOverlay.jsx"
+import { HUG_GIFS } from "../data/hugGifs.js";
+
 
 export default function SendHug() {
+  const [gif] = useState(() => {
+  return HUG_GIFS[Math.floor(Math.random() * HUG_GIFS.length)];
+});
   const [status, setStatus] = useState("")
   const [overlayOpen, setOverlayOpen] = useState(false)
   const [responseMessage, setResponseMessage] = useState("")
@@ -65,9 +70,9 @@ export default function SendHug() {
       <h1 className="text-3xl font-bold text-deep mb-4">Virtual Hug 🤗</h1>
 
       <img
-        src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExc3B5cWVrdDhoY3podGpqOWUxbmx2Z2w2NXoxOW9uMmFkdjRuazR6dyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/qCT06WLJURMyfsEi2r/giphy.gif"
-        alt="Hug GIF"
-        className="w-48 h-48 rounded-2xl shadow-lg mb-4"
+         src={gif}
+         alt="Hug GIF"
+        className=" rounded-2xl shadow-[0_25px_60px_rgba(0,0,0,0.45)] mb-4"
       />
 
       <button
