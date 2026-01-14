@@ -14,12 +14,10 @@ export default function Home() {
         transition={{ duration: 0.8 }}
         className="text-3xl md:text-5xl font-bold text-rose-600 mb-8"
       >
-        <motion.p>
-          Welcome, My Love 💕 <br />
-          This Corner of the Internet Is All Yours
-        </motion.p>
- 
+        Welcome, My Love 💕 <br />
+        This Corner of the Internet Is All Yours
       </motion.p>
+
 
       {/* Get Started Button */}
       <motion.button

@@ -3,9 +3,7 @@ import WarpOverlay from "../components/WarpOverlay.jsx"
 
 
 export default function SendHug() {
-  const [gif] = useState(() => {
-  return HUG_GIFS[Math.floor(Math.random() * HUG_GIFS.length)];
-});
+  
   const [status, setStatus] = useState("")
   const [overlayOpen, setOverlayOpen] = useState(false)
   const [responseMessage, setResponseMessage] = useState("")
