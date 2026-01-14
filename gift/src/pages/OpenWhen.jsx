@@ -86,7 +86,7 @@ export default function OpenWhen() {
   );
 
   return (
-    <div className="relative min-h-screen w-full flex flex-col items-center justify-center overflow-hidden px-4 py-10 bg-gradient-to-tr from-[#be185d] via-[#f472b6] to-[#fbcfe8]">
+    <div className="relative min-h-screen w-full flex flex-col items-center overflow-hidden px-4 py-10 bg-gradient-to-tr from-[#be185d] via-[#f472b6] to-[#fbcfe8]">
 
       {/* Background Particles */}
       <div className="absolute inset-0 z-0 pointer-events-none">
@@ -114,11 +114,15 @@ export default function OpenWhen() {
       </motion.h1>
 
       {/* 🔍 SEARCH BAR */}
-      <input
+      <motion.input
         type="text"
         placeholder="Try: cry, smile, sleep..."
         value={query}
         onChange={(e) => setQuery(e.target.value)}
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
+        whileFocus={{ scale: 1.03 }}
         className="z-10 mb-8 w-full max-w-md px-5 py-3 rounded-full text-medium bg-white/80 text-center text-rose-700 placeholder-rose-400 shadow-lg outline-none focus:ring-2 focus:ring-rose-300"
       />
 
