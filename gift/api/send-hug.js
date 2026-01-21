@@ -74,6 +74,7 @@ Do NOT generate multiple options.
 `;
     console.log('prompt :>> ', prompt);
     let aiMessage;
+    const ownerMessage = `\nHey ❤️\n\nShe just clicked “Send Hug” 🫂\n\nThat means she was thinking about you and needed a little closeness.\n\nEven if she didn’t say it out loud, this hug says enough.\n\nJust thought you should know 💗`;
 
     try {
       const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
@@ -97,12 +98,21 @@ Do NOT generate multiple options.
     });
     console.log('transporter :>> ', transporter);
 
+    /* ───────── Send Hug Email (to her) ───────── */
     await transporter.sendMail({
       from: `Virtual Hug 🤗💖 <${process.env.EMAIL_USER}>`,
       to: toEmail,
       subject: "A Virtual Hug Just for You 🤗",
       text: aiMessage,
     });
+
+     /* ───────── Acknowledgement Email (to you) ───────── */
+     await transporter.sendMail({
+      from: `Virtual Hug 🤗💖 <${process.env.EMAIL_USER}>`,
+      to: process.env.OWNER_EMAIL,
+      subject: "She just sent a hug 🫂",
+      text: ownerMessage,
+     });
 
     return res.status(200).json({
       success: true,
