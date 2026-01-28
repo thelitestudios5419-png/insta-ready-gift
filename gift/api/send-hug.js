@@ -10,7 +10,6 @@ export default async function handler(req, res) {
 
   try {
     const { toEmail } = req.body;
-    console.log('toEmail :>> ', toEmail);
     if (!toEmail || !toEmail.includes("@")) {
       return res.status(400).json({
         success: false,
@@ -20,9 +19,6 @@ export default async function handler(req, res) {
 
     /* ───────── Gemini AI ───────── */
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-    console.log('GEMINI_API_KEY :>> ', process.env.GEMINI_API_KEY);
-    console.log('EMAIL_USER :>> ', process.env.EMAIL_USER);
-    console.log('EMAIL_PASS :>> ', process.env.EMAIL_PASS);
     const prompt = `
 You are an AI companion whose only role is to send a warm, emotionally grounding “virtual hug” message whenever the user clicks the “Send Hug” button.
 The message must feel like it’s written by a loving male partner directly addressing “you” (tu / tujha / tuzya / tula) — never in third person.
@@ -72,7 +68,6 @@ Do NOT make the message mostly English.
 Do NOT mention being an AI.
 Do NOT generate multiple options.
 `;
-    console.log('prompt :>> ', prompt);
     let aiMessage;
     const ownerMessage = `\nHey ❤️\n\nShe just clicked “Send Hug” 🫂\n\nThat means she was thinking about you and needed a little closeness.\n\nEven if she didn’t say it out loud, this hug says enough.\n\nJust thought you should know 💗`;
 
@@ -80,12 +75,10 @@ Do NOT generate multiple options.
       const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
       const result = await model.generateContent(prompt);
       aiMessage = result.response.text().trim();
-      console.log('aiMessage :>> ', aiMessage);
     } catch (aiErr) {
       console.error("Gemini failed:", aiErr);
       aiMessage =
         "Heyy my baby 😘🫂 Mi ithech ahe tujhya sathi, sending all my love 💖";
-        console.log('Catch aiMessage :>> ', aiMessage);
     }
 
     /* ───────── Email ───────── */
@@ -96,7 +89,6 @@ Do NOT generate multiple options.
         pass: process.env.EMAIL_PASS,
       },
     });
-    console.log('transporter :>> ', transporter);
 
     /* ───────── Send Hug Email (to her) ───────── */
     await transporter.sendMail({

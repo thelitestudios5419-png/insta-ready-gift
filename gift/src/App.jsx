@@ -18,8 +18,8 @@ function AnimatedRoutes() {
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Home />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/open-when" element={<OpenWhen />} />
         <Route path="/open-when/:scenario" element={<Letter />} />
+        <Route path="/open-when" element={<OpenWhen />} />
         <Route path="/time-together" element={<TimeTogether />} />
         <Route path="/virtual-hug" element={<VirtualHug />} />
       </Routes>

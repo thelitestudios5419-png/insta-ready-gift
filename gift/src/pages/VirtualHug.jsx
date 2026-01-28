@@ -1,9 +1,12 @@
 import { useState } from "react"
 import WarpOverlay from "../components/WarpOverlay.jsx"
+import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 
 export default function SendHug() {
   
+  const navigate = useNavigate();
   const [status, setStatus] = useState("")
   const [overlayOpen, setOverlayOpen] = useState(false)
   const [responseMessage, setResponseMessage] = useState("")
@@ -19,7 +22,7 @@ export default function SendHug() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          toEmail: "shindevaishnavi669@gmail.com",
+          toEmail: "thelite.studios5419@gmail.com",
         }),
       })
 
@@ -37,7 +40,6 @@ export default function SendHug() {
       setResponseMessage("Oops! The server’s asleep—can’t send your hug right now 💔 Please try again soon.")
     } finally {
       setLoading(false);
-      setOverlayOpen(true);
     }
   }
 
@@ -74,11 +76,27 @@ export default function SendHug() {
 
       <button
         onClick={handleSend}
-        className="bg-deep-rose-400 text-white px-6 py-2 rounded-full shadow-lg hover:bg-pink-600 transition duration-300"
+        className="m-2 bg-deep-rose-400 text-white px-6 py-2 rounded-full shadow-lg hover:bg-pink-600 transition duration-300"
         disabled={loading}
       >
-        Send Hug 💌
+        Send a cute little Hug 💌
       </button>
+       {!overlayOpen && (
+          <motion.button
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            onClick={() => navigate("/dashboard")}
+            className="m-5 z-10 px-8 py-3 rounded-full
+                      bg-white/90 text-rose-600 font-bold text-lg
+                      shadow-lg shadow-rose-500/40
+                      hover:shadow-rose-400/60
+                      transition-all duration-300"
+          >
+            Next →
+          </motion.button>
+        )}
+
     </div>
     </div>
   )

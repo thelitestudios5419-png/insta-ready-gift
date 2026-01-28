@@ -14,14 +14,14 @@ export default function Home() {
         transition={{ duration: 0.8 }}
         className="text-3xl md:text-5xl font-bold text-rose-600 mb-8"
       >
-        Welcome, My Love 💕 <br />
-        This Corner of the Internet Is All Yours
+        Welcome ❤️ <br />
+        This little space is made just for you
       </motion.p>
 
 
       {/* Get Started Button */}
       <motion.button
-        onClick={() => navigate('/dashboard')}
+        onClick={() => navigate('/open-when')}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         className="bg-rose-500 hover:bg-rose-600 text-white text-lg md:text-lg font-semibold py-3 px-6 rounded-full shadow-lg transition duration-300"

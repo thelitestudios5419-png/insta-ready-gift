@@ -6,11 +6,12 @@ import duration from "dayjs/plugin/duration";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { motion } from "framer-motion";
 import Counter from "../components/Counter"; 
+import { useNavigate } from "react-router-dom";
 
 dayjs.extend(duration);
 dayjs.extend(relativeTime);
 
-const startDate = dayjs("2024-06-11T00:00:00");
+const startDate = dayjs("2024-12-26T00:00:00");
 
 // Framer Motion Variants
 const containerVariants = {
@@ -31,6 +32,7 @@ const cardVariants = {
 };
 
 export default function TimeTogether() {
+  const navigate = useNavigate();
   const [now, setNow] = useState(dayjs());
 
   useEffect(() => {
@@ -258,6 +260,19 @@ export default function TimeTogether() {
           </motion.span>
         </motion.div>
       </motion.div>
+      <motion.button
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          onClick={() => navigate("/virtual-hug")}
+          className="justify-center w-[35%] mt-5 z-10 py-3 rounded-full
+                    bg-white/90 text-rose-600 font-bold text-lg
+                    shadow-lg shadow-rose-500/40
+                    hover:bg-white hover:shadow-rose-400/60
+                    transition-all duration-300"
+        >
+          Next →
+        </motion.button>
     </div>
   );
 }
