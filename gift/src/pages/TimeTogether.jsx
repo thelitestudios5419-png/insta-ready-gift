@@ -74,18 +74,18 @@ export default function TimeTogether() {
   const hideGradient = { height: 0 };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-soft-pink-200 via-pink-300 to-deep-rose-500 px-4 py-12">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-crimson-200 via-pink-300 to-rosewood-500 px-4 py-12">
       {/* Heading with subtle heartbeat animation */}
       <motion.h1
-          className="text-3xl md:text-4xl font-extrabold text-rose-500 mb-8 text-center drop-shadow-xl"
+          className="text-2xl md:text-4xl font-extrabold text-rose-500 mb-8 text-center drop-shadow-xl"
           initial={{ scale: 1 }}
           transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
         >
-          Since Our Hearts Met
+          A Little Time Capsule
           <motion.span
-            className="text-deep-rose-300 drop-shadow-md"
-            animate={{ y: [0, -5, 0], opacity: [1, 0.7, 1] }}
-            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+            className="ml-2 inline-block"
+            animate={{ y: [0, -6, 0], opacity: [1, 0.8, 1] }}
+            transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
           >
             ❤️
           </motion.span>
@@ -101,7 +101,7 @@ export default function TimeTogether() {
         {/* Years / Months / Days together */}
         <motion.div
           variants={cardVariants}
-          className="bg-white bg-opacity-80 rounded-2xl p-6 shadow-lg backdrop-blur-sm flex flex-col items-center"
+          className="bg-white bg-opacity-80 rounded-3xl p-5 shadow-lg backdrop-blur-sm flex flex-col items-center"
         >
           <p className="text-sm uppercase tracking-wide text-gray-500 mb-1">
             Duration
@@ -121,7 +121,7 @@ export default function TimeTogether() {
                 topGradientStyle={hideGradient}
                 bottomGradientStyle={hideGradient}
               />
-              <span className="text-deep-rose-600 font-semibold">yr,</span>
+              <span className="text-rosewood-500 font-semibold">yr,</span>
             </div>
             {/* Months */}
             <div className="flex items-center space-x-1">
@@ -137,7 +137,7 @@ export default function TimeTogether() {
                 topGradientStyle={hideGradient}
                 bottomGradientStyle={hideGradient}
               />
-              <span className="text-deep-rose-600 font-semibold">mo,</span>
+              <span className="text-rosewood-500 font-semibold">mo,</span>
             </div>
             {/* Days */}
             <div className="flex items-center space-x-1">
@@ -153,7 +153,7 @@ export default function TimeTogether() {
                 topGradientStyle={hideGradient}
                 bottomGradientStyle={hideGradient}
               />
-              <span className="text-deep-rose-600 font-semibold">d</span>
+              <span className="text-rosewood-500  font-semibold">d</span>
             </div>
           </div>
         </motion.div>
@@ -161,7 +161,7 @@ export default function TimeTogether() {
         {/* Total Days */}
         <motion.div
           variants={cardVariants}
-          className="bg-white bg-opacity-80 rounded-2xl p-6 shadow-lg backdrop-blur-sm flex flex-col items-center"
+          className="bg-white bg-opacity-80 rounded-3xl p-5 shadow-lg backdrop-blur-sm flex flex-col items-center"
         >
           <p className="text-sm uppercase tracking-wide text-gray-500 mb-1">
             Total Days
@@ -183,7 +183,7 @@ export default function TimeTogether() {
         {/* Total Hours */}
         <motion.div
           variants={cardVariants}
-          className="bg-white bg-opacity-80 rounded-2xl p-6 shadow-lg backdrop-blur-sm flex flex-col items-center"
+          className="bg-white bg-opacity-80 rounded-3xl p-5 shadow-lg backdrop-blur-sm flex flex-col items-center"
         >
           <p className="text-sm uppercase tracking-wide text-gray-500 mb-1">
             Total Hours
@@ -205,7 +205,7 @@ export default function TimeTogether() {
         {/* Total Minutes */}
         <motion.div
           variants={cardVariants}
-          className="bg-white bg-opacity-80 rounded-2xl p-6 shadow-lg backdrop-blur-sm flex flex-col items-center"
+          className="bg-white bg-opacity-80 rounded-3xl p-5 shadow-lg backdrop-blur-sm flex flex-col items-center"
         >
           <p className="text-sm uppercase tracking-wide text-gray-500 mb-1">
             Total Minutes
@@ -227,7 +227,7 @@ export default function TimeTogether() {
         {/* Total Seconds */}
         <motion.div
           variants={cardVariants}
-          className="bg-white bg-opacity-80 rounded-2xl p-6 shadow-lg backdrop-blur-sm flex flex-col items-center"
+          className="bg-white bg-opacity-80 rounded-3xl p-5 shadow-lg backdrop-blur-sm flex flex-col items-center"
         >
           <p className="text-sm uppercase tracking-wide text-gray-500 mb-1">
             Total Seconds
@@ -260,16 +260,16 @@ export default function TimeTogether() {
           </motion.span>
         </motion.div>
       </motion.div>
-      <motion.button
-          initial={{ opacity: 0, y: 20 }}
+        <motion.button
+          initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
           onClick={() => navigate("/virtual-hug")}
-          className="justify-center w-[35%] mt-5 z-10 py-3 rounded-full
-                    bg-white/90 text-rose-600 font-bold text-lg
-                    shadow-lg shadow-rose-500/40
-                    hover:bg-white hover:shadow-rose-400/60
-                    transition-all duration-300"
+          className="z-10 mt-8 mx-auto w-18  py-3 rounded-full
+                     bg-crimson-600 text-white font-semibold text-lg
+                     shadow-[0_16px_44px_rgba(220,38,38,0.20)]
+                     hover:bg-crimson-700 transition-all duration-300"
+          aria-label="Next to Time Together"
         >
           Next →
         </motion.button>

@@ -47,7 +47,7 @@ export default function OpenWhen() {
   ];
 
   return (
-    <div className="justify-center relative min-h-screen w-full flex flex-col items-center overflow-hidden px-4 py-10 bg-gradient-to-tr from-[#be185d] via-[#f472b6] to-[#fbcfe8]">
+    <div className="justify-center relative min-h-screen w-full flex flex-col items-center overflow-hidden px-4 py-10 bg-gradient-to-tr from-[#be185d] via-[#f472b6] to-crimson-300">
 
       {/* Background Particles */}
       <div className="absolute inset-0 z-0 pointer-events-none">
@@ -65,14 +65,16 @@ export default function OpenWhen() {
       </div>
 
       {/* Heading */}
-      <motion.h1
-        initial={{ opacity: 0, y: -30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        className="z-10 text-3xl sm:text-4xl font-bold text-rose-600 mb-6 text-center drop-shadow-md"
-      >
-        💌 Choose a Letter…
-      </motion.h1>
+        <motion.h1
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+          className="z-10 text-3xl sm:text-4xl font-bold text-crimson-600 mb-8 text-center tracking-tight"
+        >
+          💌 Choose a Letter
+          <span className="ml-2 text-crimson-600">♥</span>
+        </motion.h1>
+
 
       {/* Letters */}
       <motion.div
@@ -92,7 +94,7 @@ export default function OpenWhen() {
                     boxShadow: "0 8px 24px rgba(255, 149, 185, 0.4)",
                   }}
                   whileTap={{ scale: 0.96 }}
-                  className="w-[93%] mx-auto bg-white/80 backdrop-blur-md rounded-3xl py-5 px-4 text-center text-lg font-medium text-rose-700 hover:text-rose-900 shadow-lg shadow-rose-500/40 hover:shadow-2xl hover:shadow-rose-400/60 transition-all duration-300"
+                  className="mx-auto w-[88%] max-w-md bg-white border border-crimson-50 backdrop-blur-sm rounded-3xl py-5 px-6 text-center text-base font-medium text-rosewood-300 hover:text-crimson-700 shadow-[0_10px_30px_rgba(30,30,30,0.06)] transition-all duration-300"
                 >
                   {cond.title}
                 </motion.div>
@@ -101,19 +103,20 @@ export default function OpenWhen() {
           );
         })}
       </motion.div>
-      <motion.button
-          initial={{ opacity: 0, y: 20 }}
+        <motion.button
+          initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
           onClick={() => navigate("/time-together")}
-          className="justify-center w-[35%] mt-5 z-10 py-3 rounded-full
-                    bg-white/90 text-rose-600 font-bold text-lg
-                    shadow-lg shadow-rose-500/40
-                    hover:shadow-rose-400/60
-                    transition-all duration-300"
+          className="z-10 mt-8 mx-auto w-18 py-3 rounded-full
+                     bg-crimson-600 text-white font-semibold text-lg
+                     shadow-[0_16px_44px_rgba(220,38,38,0.20)]
+                     hover:bg-crimson-700 transition-all duration-300"
+          aria-label="Next to Time Together"
         >
           Next →
         </motion.button>
     </div>
   );
 }
+

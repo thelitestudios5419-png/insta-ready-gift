@@ -7,17 +7,30 @@ export default {
   theme: {
     extend: {
       colors: {
-        "soft-pink": {
-          100: "#FFECEE",
-          200: "#FADADD",
-          300: "#F5BFC4",
-          400: "#F1A4AC",
+        ivory: "#FAF7F2",
+        charcoal: "#2B2B2B",
+
+        crimson: {
+          50: "#FFF1F2",
+          100: "#FFE4E6",
+          200: "#FECDD3",
+          300: "#FCA5A5",
+          400: "#F87171",
+          500: "#EF4444",
+          600: "#DC2626",
+          700: "#B91C1C",
+          800: "#991B1B",
         },
-        "deep-rose": {
-          300: "#FF9A9A",
-          400: "#FF6B6B",
-          500: "#F43F5E",
-          600: "#E11D48",
+
+        rosewood: {
+          300: "#E11D48",
+          400: "#BE123C",
+          500: "#b51240",
+        },
+
+        mist: {
+          100: "#F5F5F5",
+          200: "#E5E7EB",
         },
       },
     },
