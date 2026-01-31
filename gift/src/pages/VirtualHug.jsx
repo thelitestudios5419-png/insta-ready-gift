@@ -1,3 +1,5 @@
+// src/pages/VirtualHug.jsx
+
 import { useState } from "react";
 import WarpOverlay from "../components/WarpOverlay.jsx";
 import { motion } from "framer-motion";
@@ -5,12 +7,14 @@ import { useNavigate } from "react-router-dom";
 
 export default function SendHug() {
   const navigate = useNavigate();
+  const [hugPhase, setHugPhase] = useState("idle"); 
   const [overlayOpen, setOverlayOpen] = useState(false);
   const [responseMessage, setResponseMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleSend = async () => {
     setLoading(true);
+    setHugPhase("sending");
     setOverlayOpen(true);
     setResponseMessage("Sending a warm hug… 🫂💗");
 
@@ -24,17 +28,19 @@ export default function SendHug() {
       });
 
       const data = await response.json();
+
+      setHugPhase("response");
+      setOverlayOpen(true); // 🔥 reopen no matter what
+
       if (data.success) {
         setResponseMessage("Hug sent successfully, with love! 🫂💗");
       } else {
-        setResponseMessage(
-          "Aww, the hug got lost 😢 Try sending it again!"
-        );
+        setResponseMessage("Aww, the hug got lost 😢 Try sending it again!");
       }
     } catch (error) {
-      setResponseMessage(
-        "Oops! Something went wrong 💔 Please try again."
-      );
+      setHugPhase("response");
+      setOverlayOpen(true); // 🔥 reopen even if user cancelled earlier
+      setResponseMessage("Oops! Something went wrong 💔 Please try again.");
     } finally {
       setLoading(false);
     }
@@ -47,11 +53,20 @@ export default function SendHug() {
       <div className="absolute inset-0 bg-gradient-to-tr from-crimson-200 via-crimson-300 to-rosewood-300" />
       <div className="relative z-10 min-h-screen flex flex-col items-center justify-center px-5 text-center">
         
-        <WarpOverlay
-          open={overlayOpen}
-          message={responseMessage}
-          onClose={() => setOverlayOpen(false)}
-        />
+      <WarpOverlay
+        open={overlayOpen}
+        message={responseMessage}
+        onClose={() => {
+          // Only allow full close after response is shown
+          if (hugPhase === "response") {
+            setOverlayOpen(false);
+            setHugPhase("idle");
+          } else {
+            setOverlayOpen(false); // sending overlay can be cancelled
+          }
+        }}
+      />
+
 
         {/* Title */}
         <motion.h1
