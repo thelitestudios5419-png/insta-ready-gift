@@ -33,14 +33,14 @@ export default function SendHug() {
       setOverlayOpen(true); // 🔥 reopen no matter what
 
       if (data.success) {
-        setResponseMessage("Hug sent successfully, with love! 🫂💗");
+        setResponseMessage("This is a demo 💖\n\nComplete the process to send this hug to your loved one ✨");
       } else {
-        setResponseMessage("Aww, the hug got lost 😢 Try sending it again!");
+        setResponseMessage("This is a demo 💖\n\nComplete the process to send this hug to your loved one ✨");
       }
     } catch (error) {
       setHugPhase("response");
       setOverlayOpen(true); // 🔥 reopen even if user cancelled earlier
-      setResponseMessage("Oops! Something went wrong 💔 Please try again.");
+      setResponseMessage("This is a demo 💖\n\nComplete the process to send this hug to your loved one ✨");
     } finally {
       setLoading(false);
     }
